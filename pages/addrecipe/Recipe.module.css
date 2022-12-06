@@ -1,0 +1,69 @@
+.photo {
+  position: absolute;
+}
+
+.video button {
+  display: block;
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+}
+
+.photo {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 60px;
+  width: 700px;
+  height: 200px;
+}
+
+.title {
+  position: absolute;
+  margin-top: 230px;
+  margin-left: 60px;
+  width: 700px;
+}
+
+.igredients {
+  position: absolute;
+  margin-top: 290px;
+  margin-left: 60px;
+  width: 700px;
+  height: 200px;
+}
+
+.video {
+  position: absolute;
+  margin-top: 500px;
+  margin-left: 60px;
+  width: 700px;
+}
+
+.addrecipe button {
+  position: absolute;
+  margin-top: 580px;
+  margin-left: 260px;
+  width: 200px;
+}
+
+.footer {
+  background-color: #efc81a;
+  height: 320px;
+  text-align: center;
+  margin-top: 700px;
+}
+.footer h3 {
+  padding-top: 100px;
+  font-size: 50px;
+}
+
+.tag {
+  display: flex;
+  padding-top: 70px;
+  justify-content: center;
+  text-align: center;
+}
+
+.tag p {
+  padding-left: 30px;
+}

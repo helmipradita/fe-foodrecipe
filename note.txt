@@ -1,0 +1,29 @@
+=> Buatlah slicing dan integrasi halaman web dari mockup dibawah ini
+UI : 
+https://www.figma.com/file/SUbBTYCq1e4ngRt20lSdqr/Food-Recipe?node-id=0%3A1
+
+=> Requirements:
+Teori (NextJS, SSR & CSR)
+UI
+Next component
+Navigation
+CRUD
+Authentication (optional)
+Search, sort
+Responsive
+ENV
+Reusable Component
+REDUX (opsional)
+Deploy
+Buat semirip mungkin sesuai figma
+Gunakan Bahasa Inggris untuk nama class, id, fungsi dan komponen
+Upload/push ke github dan gunakan nama yang profesional
+Presentasikan
+
+=> Optional 
+Chat
+Notifikasi
+Pagination
+REDUX
+SSR (optional)
+Profile
