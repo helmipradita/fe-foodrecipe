@@ -2,8 +2,14 @@ import Image from 'next/image';
 import styles from './Register.module.css';
 import Logo from '../../public/iconLogo.png';
 import Link from 'next/link';
+import React, { SyntheticEvent, useState } from 'react';
 
-export default function Index() {
+const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div>
       <div className="container-fluid">
@@ -102,4 +108,6 @@ export default function Index() {
       </div>
     </div>
   );
-}
+};
+
+export default Register;

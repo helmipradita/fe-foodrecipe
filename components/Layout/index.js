@@ -7,10 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <div className="container">
-        <Nav
-          activeKey="/"
-          onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-        >
+        <Nav activeKey="/">
           <Nav.Item>
             <Nav.Link className={styles.nav} href="/">
               Home

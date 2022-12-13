@@ -27,3 +27,28 @@ Pagination
 REDUX
 SSR (optional)
 Profile
+
+
+
+
+
+
+=> Requirements:
+Remua requirement di minggu 9 (terumat crud dan
+pagination, search dan sort)
+Menggunakan dynamic route
+Menggunakan static data dan path (SGG)
+Fetching dari server (SSR)
+Otentikasi (login, resgister, dan logout)
+Buat semirip mungkin sesuai figma
+Gunakan Bahasa Inggris untuk nama class, id, fungsi dan
+komponen
+Upload/push ke github dan gunakan nama yang profesional
+Presentasikan
+Toeri, SSG, library and framework, unit testing
+
+=> Optional
+Redux
+Refresh Token
+User Activation via email
+Unit testing

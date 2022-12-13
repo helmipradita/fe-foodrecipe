@@ -1,20 +1,29 @@
 import Image from 'next/image';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
+import Link from 'next/link';
+import Alert from '../components/Alert';
 
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:8001/recipes');
-  const data = await res.json();
-  return {
-    props: {
-      data,
-    },
-  };
-}
+const Home = () => {
+  //get popular
+  const [get, setGet] = useState([]);
+  const res = 'http://localhost:8001/recipes?sortBy=id&sortOrder=DESC&limit=6';
 
-const home = ({ data }) => {
+  useEffect(() => {
+    axios
+      .get(res)
+      .then((result) => {
+        result.data && setGet(result.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <Layout>
@@ -22,12 +31,20 @@ const home = ({ data }) => {
           <div className={`col-md-6`}>
             <p className={styles.text}>Discover Recipe & Delicios Food</p>
 
-            <InputGroup size="lg" className={styles.input}>
+            {/* <InputGroup size="lg" className={styles.input}>
               <Form.Control
                 aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm"
               />
-            </InputGroup>
+            </InputGroup> */}
+            <div className="search ms-2">
+              <input
+                type="text"
+                className="form-control"
+                name="search"
+                placeholder="search"
+              />
+            </div>
           </div>
 
           <div className="col-md-6">
@@ -110,86 +127,29 @@ const home = ({ data }) => {
 
           <div className={styles.popularRecipe}>
             <div className={styles.text3}>
-              <p>Popular Recipe</p>
+              <p>Popular Recipes</p>
             </div>
           </div>
 
-          {/* <div>
-            {Object.values(data).map((item) => (
-              <h5 key={item.id}>{item.title}</h5>
+          <div className="card-group" style={{ marginTop: '1900px' }}>
+            {get.map((p) => (
+              <div key={p.id} className={`col-md-4 mb-5 `}>
+                <div>
+                  <Link href={`/recipe/${p.id}`}>
+                    <img
+                      className="rounded"
+                      src={p.photo}
+                      alt="popular2"
+                      width={300}
+                      height={300}
+                    />
+                  </Link>
+                  <h4 style={{ marginTop: '-50px', marginLeft: '10px' }}>
+                    {p.title}
+                  </h4>
+                </div>
+              </div>
             ))}
-          </div> */}
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular1}
-                src="/popular1.png"
-                alt="popular1"
-                width={300}
-                height={300}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular2}
-                src="/popular2.png"
-                alt="popular2"
-                width={300}
-                height={300}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular3}
-                src="/popular3.png"
-                alt="popular3"
-                width={300}
-                height={300}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular4}
-                src="/popular4.png"
-                alt="popular4"
-                width={300}
-                height={300}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular5}
-                src="/popular5.png"
-                alt="popular5"
-                width={300}
-                height={300}
-              />
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div>
-              <Image
-                className={styles.popular6}
-                src="/popular6.png"
-                alt="popular6"
-                width={300}
-                height={300}
-              />
-            </div>
           </div>
         </div>
       </Layout>
@@ -208,4 +168,5 @@ const home = ({ data }) => {
     </div>
   );
 };
-export default home;
+
+export default Home;

@@ -1,5 +1,5 @@
 export async function getStaticProps() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users');
+  const res = await fetch('http://localhost:8001/recipes');
   const data = await res.json();
   return {
     props: {
@@ -13,7 +13,7 @@ const user = ({ data }) => {
     <div>
       <div>list user</div>
       {data.map((item) => (
-        <h5 key={item.id}>{item.name}</h5>
+        <h5 key={item.id}>{item.success}</h5>
       ))}
     </div>
   );
