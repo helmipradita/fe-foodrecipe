@@ -13,7 +13,7 @@ const AddRecipe = () => {
   const res = 'http://localhost:8001/recipes';
   const [input, setInput] = useState({
     title: '',
-    igredients: '',
+    ingredients: '',
     videos: '',
   });
 
@@ -36,8 +36,8 @@ const AddRecipe = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', input.title);
-    formData.append('igredients', input.igredients);
-    formData.append('photo', photo, photo.name);
+    formData.append('ingredients', input.ingredients);
+    formData.append('photo', photo, input.photo);
     formData.append('videos', input.videos);
     try {
       const result = await axios({
@@ -59,7 +59,7 @@ const AddRecipe = () => {
   //   const formData = new FormData();
   //   formData.append('photo', input.photo);
   //   formData.append('title', input.title);
-  //   formData.append('igredients', input.igredients);
+  //   formData.append('ingredients', input.ingredients);
   //   formData.append('videos', input.videos);
   //   console.log(formData);
   //   axios
@@ -108,16 +108,16 @@ const AddRecipe = () => {
               id="exampleFormControlTextarea1"
               rows="3"
               type="text"
-              placeholder="igredients"
+              placeholder="ingredients"
               style={{
                 width: '100%',
                 paddingBottom: '10%',
                 paddingTop: '10%',
                 backgroundColor: '#F6F5F4',
               }}
-              value={input.igredients}
+              value={input.ingredients}
               onChange={handleChange}
-              name="igredients"
+              name="ingredients"
             />
             <input
               type="text"
