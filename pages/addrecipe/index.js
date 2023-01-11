@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import Button from '../../components/Button';
 import Layout from '../../components/Layout';
 import Image from 'next/image';
@@ -6,102 +5,106 @@ import styles from './Recipe.module.css';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import React, { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import axios from 'axios';
+import Navbar from '../../components/Navbar/Navbar';
 
-const AddRecipe = () => {
-  const res = 'http://localhost:8001/recipes';
-  const [input, setInput] = useState({
-    title: '',
-    ingredients: '',
-    videos: '',
-  });
+export const getServerSideProps = async (context) => {
+  const { token } = context.req.cookies;
 
-  const [photo, setPhoto] = useState([]);
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: true,
+      },
+    };
+  }
+  console.log(token, 'token ssr');
+  return {
+    props: {
+      isLogin: token ? true : false,
+      token: token,
+    },
+  };
+};
 
-  const handleChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
+const AddRecipe = ({ isLogin, token }) => {
+  // const router = useRouter();
+  const [upload, setUpload] = useState(false);
+  const [title, setTitle] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [photo, setPhoto] = useState({});
+  const [videos, setVideos] = useState([]);
+
+  const handleImage = (e) => {
+    setPhoto({
+      file: e.target.files[0],
+      preview: URL.createObjectURL(e.target.files[0]),
     });
   };
 
-  const handlePhoto = (e) => {
-    const handle = e.target.files[0];
-    setPhoto(handle);
-    console.log(handle);
+  const handleVideo = (e) => {
+    setVideos({
+      file: e.target.files[0],
+      preview: URL.createObjectURL(e.target.files[0]),
+    });
   };
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', input.title);
-    formData.append('ingredients', input.ingredients);
-    formData.append('photo', photo, input.photo);
-    formData.append('videos', input.videos);
+  const handleRecipes = async () => {
     try {
-      const result = await axios({
-        method: 'POST',
-        url: 'http://localhost:8001/recipes',
-        data: formData,
+      setUpload(true);
+      const data = new FormData();
+      data.append('title', title);
+      data.append('ingredients', ingredients);
+      data.append('photo', photo.file);
+      data.append('videos', videos);
+      // const config = {
+      //   headers: {
+      //     "content-type": "multipart/form-data",
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // };
+      const user = {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
         },
-      });
-      console.log(result);
-    } catch (error) {
-      console.log('failed', error);
+      };
+      console.log(user, 'token');
+      await axios.post(process.env.REST_API + '/recipes', data, user);
+      Swal.fire('Success', 'Add recipes success', 'success');
+    } catch (err) {
+      Swal.fire('Failed', 'Add recipes fails', 'error');
+      console.log(err);
     }
   };
-
-  // const postForm = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append('photo', input.photo);
-  //   formData.append('title', input.title);
-  //   formData.append('ingredients', input.ingredients);
-  //   formData.append('videos', input.videos);
-  //   console.log(formData);
-  //   axios
-  //     .post(res, formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //         'Access-Control-Allow-Origin': '*',
-  //       },
-  //     })
-  //     .then((result) => {
-  //       console.log(result, 'insert data success');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message, 'insert data fail');
-  //     });
-  // };
-
   return (
     <div>
+      <header>
+        <Navbar isLogin={isLogin} />
+      </header>
       <Layout>
-        <form className="container " onSubmit={handleUpload}>
+        <form className="container ">
           <div className="col-10 offset-1">
             <input
               type="file"
-              name="photo"
               className="form-control mb-3"
               id="exampleFormControlInput1"
               placeholder="photo"
               style={{ backgroundColor: '#F6F5F4' }}
               accept="image/*"
-              value={input.photo}
-              onChange={handlePhoto}
+              name="photo"
+              onChange={handleImage}
             />
             <input
               type="text"
-              name="title"
               className="form-control mb-3"
               id="exampleFormControlInput1"
               placeholder="title"
               style={{ backgroundColor: '#F6F5F4' }}
-              value={input.title}
-              onChange={handleChange}
+              name="title"
+              onChange={(e) => setTitle(e.target.value)}
             />
             <textarea
               className="form-control mb-3"
@@ -115,9 +118,8 @@ const AddRecipe = () => {
                 paddingTop: '10%',
                 backgroundColor: '#F6F5F4',
               }}
-              value={input.ingredients}
-              onChange={handleChange}
               name="ingredients"
+              onChange={(e) => setIngredients(e.target.value)}
             />
             <input
               type="text"
@@ -126,20 +128,20 @@ const AddRecipe = () => {
               id="exampleFormControlInput1"
               placeholder="videos"
               style={{ backgroundColor: '#F6F5F4' }}
-              value={input.videos}
-              onChange={handleChange}
+              onChange={(e) => setVideos(e.target.value)}
             />
-            <div className="col-8 offset-4">
-              <button
-                type="submit"
-                className="btn btn-warning mb-3 text-white"
-                style={{ width: '40%' }}
-              >
-                Post
-              </button>
-            </div>
           </div>
         </form>
+        <div className="col-8 offset-4">
+          <button
+            type="submit"
+            className="btn btn-warning mb-3 text-white"
+            style={{ width: '40%' }}
+            onClick={handleRecipes}
+          >
+            Post
+          </button>
+        </div>
       </Layout>
       <footer className={styles.footer}>
         <h3>Eat, Cook, Repeat</h3>

@@ -7,44 +7,47 @@ import Layout from '../components/Layout';
 import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import Alert from '../components/Alert';
+import Navbar from '../components/Navbar/Navbar';
+import Router from 'next/router';
 
-const Home = () => {
-  //get popular
-  const [get, setGet] = useState([]);
-  const res = 'http://localhost:8001/recipes?sortBy=id&sortOrder=DESC&limit=6';
-
+const Home = ({ isLogin, href }) => {
+  const [data, setData] = useState([]);
   useEffect(() => {
-    axios
-      .get(res)
-      .then((result) => {
-        result.data && setGet(result.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const getdata = async () => {
+      try {
+        const limit = 8;
+        let result = await axios.get(
+          process.env.REST_API + `/recipes/all?limit=${limit}`
+        );
+        setData(result.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getdata();
   }, []);
+  const handleClick = (e) => {
+    e.preventDefault();
+    Router.push(href);
+  };
 
   return (
     <div>
+      <header>
+        <Navbar isLogin={isLogin} />
+      </header>
       <Layout>
         <div className="row">
           <div className={`col-md-6`}>
             <p className={styles.text}>Discover Recipe & Delicios Food</p>
 
-            {/* <InputGroup size="lg" className={styles.input}>
+            <InputGroup size="lg" className={styles.input}>
               <Form.Control
                 aria-label="Large"
                 aria-describedby="inputGroup-sizing-sm"
+                placeholder="Search Restaurant,Food"
               />
-            </InputGroup> */}
-            <div className="search ms-2">
-              <input
-                type="text"
-                className="form-control"
-                name="search"
-                placeholder="search"
-              />
-            </div>
+            </InputGroup>
           </div>
 
           <div className="col-md-6">
@@ -132,24 +135,31 @@ const Home = () => {
           </div>
 
           <div className="card-group" style={{ marginTop: '1900px' }}>
-            {get.map((p) => (
-              <div key={p.id} className={`col-md-4 mb-5 `}>
-                <div>
-                  <Link href={`/recipe/${p.id}`}>
-                    <img
-                      className="rounded"
-                      src={p.photo}
-                      alt="popular2"
-                      width={300}
-                      height={300}
-                    />
-                  </Link>
-                  <h4 style={{ marginTop: '-50px', marginLeft: '10px' }}>
-                    {p.title}
-                  </h4>
+            {data ? (
+              data.map((item, key) => (
+                <div className="col-3 mt-5 d-flex flex-column" key={item.id}>
+                  <img
+                    src={item.photo}
+                    style={{ height: '300px', width: '300px' }}
+                    className="rounded"
+                    onClick={() => Router.push(`/recipes/${item.id}`)}
+                  />
+                  <h6
+                    style={{
+                      marginTop: '-40px',
+                      marginLeft: '20px',
+                      fontSize: '20px',
+                      color: 'white',
+                    }}
+                    className=""
+                  >
+                    {item.title}
+                  </h6>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <h3>Loading</h3>
+            )}
           </div>
         </div>
       </Layout>
@@ -167,6 +177,15 @@ const Home = () => {
       </footer>
     </div>
   );
+};
+
+export const getServerSideProps = async (context) => {
+  const { token } = context.req.cookies;
+  return {
+    props: {
+      isLogin: token ? true : false,
+    },
+  };
 };
 
 export default Home;

@@ -1,0 +1,10 @@
+.card {
+  margin-top: 50px;
+  width: 90%;
+  border-radius: 30px;
+  background-color: rgb(230, 219, 219);
+  float: center;
+  padding: 20px;
+  animation: come 400ms ease-in-out forwards;
+  transform-origin: top center;
+}
