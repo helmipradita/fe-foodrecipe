@@ -6,7 +6,7 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Screenshot](#screenshot)
-* * [Related Project](#related-project)
+* [Related Project](#related-project)
 * [Contact](#contact)
 
 ## About The Project
@@ -68,9 +68,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 | ------------- | ------------- | ------------- |
 | ![seach](https://i.imgur.com/zboH6LO.png) | ![detail](https://i.imgur.com/OpQWOnz.png) | ![comment](https://i.imgur.com/rBsyhkB.png) |
 
+
 ## Related Project
-* [`Backend Recipe Project`](https://github.com/helmipradita/be-foodrecipe)
-* [`Recipe REST API`](https://api-recipe.helmipradita.dev)
+* [`Backend Project Recipe `](https://github.com/helmipradita/be-foodrecipe)
+* [`REST API Recipe`](https://api-recipe.helmipradita.dev)
 
 ## Contact
 
