@@ -1,8 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Related Project](#related-project)
+* [Screenshot](#screenshot)
+* [Contact](#contact)
+
+## About The Project
+
+Food Recipea website for looking for recipes for delicious meals, there are popular recipes that can be used to find ideas for your everyday dishes. There is a login feature as a member to be able to upload the results of your own cooking recipes and can be seen by all visitors to the food recipe website. After registering and having an account, there is a menu like recipes, save recipes and comments on the recipes you follow so that you can exchange information with each other. [demo recipe](https://ankasa.rizkyproject.my.id/)
+
+### Built With
+
+* [Node JS](https://nodejs.org/en/docs/)
+* [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+* [nodejs](https://nodejs.org/en/download/)
+
+### Installation
+
+1. Clone the repo
+```bash
+git clone https://github.com/helmipradita/fe-foodrecipe
+```
+2. Install NPM packages
+```bash
+npm install
+```
+3. Add .env file at root folder project, and add following or use your own
+```bash
+REST_API=https://api-recipe.helmipradita.dev
+```
+4. Run the development server:
 
 ```bash
 npm run dev
@@ -12,23 +50,30 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Screenshot
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+| Landing Page | Popular Recipe | Recipe From User |
+| ------------- | ------------- | ------------- |
+| ![landing page](https://i.imgur.com/4VPieug.png) | ![popular](https://i.imgur.com/FDgDLW5.png) | ![recipe](https://i.imgur.com/WOstP1G.jpg) |
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+| Login Page | Register Page | Add Recipe |
+| ------------- | ------------- | ------------- |
+| ![login](https://i.imgur.com/ThHcbZj.jpg) | ![register](https://i.imgur.com/WJNqGNb.jpg) | ![add](https://i.imgur.com/VPJlBiP.png) |
 
-## Learn More
+| Profile - My Recipe | Profile - Save Recipe | Profile - Like Recipe |
+| ------------- | ------------- |  ------------- |
+| ![myrecipe](https://i.imgur.com/8HabBvN.png) | ![saverecipe](https://i.imgur.com/St572Sm.png) | ![likerecipe](https://i.imgur.com/yun3WFA.png) |
 
-To learn more about Next.js, take a look at the following resources:
+| Search Recipe | Detail Recipe | Comment Recipe |
+| ------------- | ------------- | ------------- |
+| ![seach](https://i.imgur.com/zboH6LO.png) | ![detail](https://i.imgur.com/OpQWOnz.png) | ![comment](https://i.imgur.com/rBsyhkB.png) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Related Project
+* [`Backend Recipe Project`](https://github.com/helmipradita/be-foodrecipe)
+* [`Recipe REST API`](https://api-recipe.helmipradita.dev)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
+Contributors names and contact info Fullstack Developers
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+* Helmi Pradita [@helmipradita](https://github.com/helmipradita)
