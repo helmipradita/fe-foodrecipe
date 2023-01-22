@@ -11,7 +11,7 @@
 
 ## About The Project
 
-Food Recipea website for looking for recipes for delicious meals, there are popular recipes that can be used to find ideas for your everyday dishes. There is a login feature as a member to be able to upload the results of your own cooking recipes and can be seen by all visitors to the food recipe website. After registering and having an account, there is a menu like recipes, save recipes and comments on the recipes you follow so that you can exchange information with each other. [demo recipe]()
+Food Recipes website for looking for recipes for delicious meals, there are popular recipes that can be used to find ideas for your everyday dishes. There is a login feature as a member to be able to upload the results of your own cooking recipes and can be seen by all visitors to the food recipe website. After registering and having an account, there is a menu like recipes, save recipes and comments on the recipes you follow so that you can exchange information with each other. [demo recipe]()
 
 ### Built With
 
